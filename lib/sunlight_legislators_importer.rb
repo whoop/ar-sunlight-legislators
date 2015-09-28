@@ -1,14 +1,20 @@
 require 'csv'
+require_relative '../app/models/legislator'
 
 class SunlightLegislatorsImporter
   def self.import(filename)
+    attributes_array = Legislator.columns.map(&:name)
     csv = CSV.new(File.open(filename), :headers => true)
     csv.each do |row|
-      row.each do |field, value|
-        # TODO: begin
-        raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
-        # TODO: end
-      end
+      cleaned_row = row.to_hash.delete_if{ |key, value| attributes_array.include?(key) == false }.symbolize_keys!
+      cleaned_row[:firstname].strip! unless cleaned_row[:firstname] == nil
+      cleaned_row[:lastname].strip! unless cleaned_row[:lastname] == nil
+      cleaned_row[:middlename].strip! unless cleaned_row[:middlename] == nil
+      cleaned_row[:phone].gsub!("-","")
+      cleaned_row[:fax].gsub!("-","")
+      formatted_birthdate = cleaned_row[:birthdate].gsub!(/\//,"-")
+      cleaned_row[:birthdate] = Date.strptime(formatted_birthdate, '%m-%d-%Y')
+      legislator = Legislator.create!( cleaned_row )
     end
   end
 end

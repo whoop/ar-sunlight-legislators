@@ -25,10 +25,18 @@ require_relative 'app/models/legislator'
 # gender_reps_percentage = ((gender_reps.count)/(reps.count.to_f)).round(3)*100
 # puts "#{gender} representatives: #{gender_reps.count} (#{gender_reps_percentage}%)"
 
-active_legislators = Legislator.where("in_office = ?", 1)
-counts = active_legislators.group(:state).order('count_id DESC').count('id')
-counts.each do |state, legislator_count|
-  state_rep_count = active_legislators.where("state = ?", state).where("title = ?", "Rep").count
-  state_senator_count = active_legislators.where("state = ?", state).where("title = ?", "Sen").count
-  puts "#{state}: #{state_senator_count} senators, #{state_rep_count} representatives"
-end
+# active_legislators = Legislator.where("in_office = ?", 1).where("title = ? OR title = ?", "Sen", "Rep")
+# counts = active_legislators.group(:state).order('count_id DESC').count('id')
+# counts.each do |state, legislator_count|
+#   state_rep_count = active_legislators.where("state = ?", state).where("title = ?", "Rep").count
+#   state_senator_count = active_legislators.where("state = ?", state).where("title = ?", "Sen").count
+#   puts "#{state}: #{state_senator_count} senators, #{state_rep_count} representatives"
+# end
+
+# puts "Senators: #{Legislator.where("title = ?", "Sen").count}"
+# puts "Representatives: #{Legislator.where("title = ?", "Rep").count}"
+
+# Legislator.delete_all("in_office = 0")
+
+# puts "Senators: #{Legislator.where("title = ?", "Sen").count}"
+# puts "Representatives: #{Legislator.where("title = ?", "Rep").count}"

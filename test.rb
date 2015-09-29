@@ -1,5 +1,5 @@
 require_relative 'app/models/legislator'
-
+require_relative 'config/environment'
 # state = "CA"
 # legislators_from_ca = Legislator.where("state = ?", state)
 # if legislators_from_ca.pluck(:title).include?("Sen")
@@ -40,3 +40,6 @@ require_relative 'app/models/legislator'
 
 # puts "Senators: #{Legislator.where("title = ?", "Sen").count}"
 # puts "Representatives: #{Legislator.where("title = ?", "Rep").count}"
+
+gem_handle = $client.user_timeline("gem")
+p gem_handle

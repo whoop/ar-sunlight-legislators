@@ -42,5 +42,5 @@ require_relative 'config/environment'
 # puts "Representatives: #{Legislator.where("title = ?", "Rep").count}"
 
 Legislator.where("twitter_id <> ''").each do |legislator|
-  p "#{legislator.firstname}: #{legislator.twitter_id}"
+  p legislator.twitter_id
 end

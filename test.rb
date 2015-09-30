@@ -1,6 +1,7 @@
 require_relative 'app/models/legislator'
 require_relative 'config/environment'
 require_relative 'app/models/tweet'
+
 # state = "CA"
 # legislators_from_ca = Legislator.where("state = ?", state)
 # if legislators_from_ca.pluck(:title).include?("Sen")
@@ -61,3 +62,5 @@ Legislator.where("twitter_id <> ''").each do |legislator|
   rescue Twitter::Error::NotFound
   end
 end
+
+# p Tweet.all.last

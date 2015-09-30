@@ -41,5 +41,6 @@ require_relative 'config/environment'
 # puts "Senators: #{Legislator.where("title = ?", "Sen").count}"
 # puts "Representatives: #{Legislator.where("title = ?", "Rep").count}"
 
-gem_handle = $client.user_timeline("gem")
-p gem_handle
+Legislator.where("twitter_id <> ''").each do |legislator|
+  p "#{legislator.firstname}: #{legislator.twitter_id}"
+end

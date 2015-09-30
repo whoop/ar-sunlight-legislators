@@ -5,9 +5,9 @@ class CreateLegislators < ActiveRecord::Migration
     create_table :legislators do |c|
       c.string :title
       c.string :firstname
-      c.string :middlename
+      c.string :middlename, default: nil
       c.string :lastname
-      c.string :name_suffix
+      c.string :name_suffix, default: nil
       # c.string :nickname
       c.string :party
       c.string :state
@@ -16,15 +16,15 @@ class CreateLegislators < ActiveRecord::Migration
       c.string :gender
       c.string :phone
       c.string :fax
-      c.string :website
-      c.string :webform
+      c.string :website, default: nil
+      c.string :webform, default: nil
       # c.string :congress_office
       # c.string :bioguide_id
       # c.integer :votesmart_id
       # c.string :fec_id
       # c.integer :govtrack_id
       # c.string :crp_id
-      c.string :twitter_id
+      c.string :twitter_id, default: nil
       # c.string :congresspedia_url
       # c.string :youtube_url
       # c.string :facebook_id

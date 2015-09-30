@@ -63,4 +63,6 @@ Legislator.where("twitter_id <> ''").each do |legislator|
   end
 end
 
-# p Tweet.all.last
+# 10.times do
+#   p Legislator.where("twitter_id <> ''").sample.tweets
+# end

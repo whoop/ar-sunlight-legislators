@@ -1,5 +1,6 @@
 require_relative 'app/models/legislator'
 require_relative 'config/environment'
+require_relative 'app/models/tweet'
 # state = "CA"
 # legislators_from_ca = Legislator.where("state = ?", state)
 # if legislators_from_ca.pluck(:title).include?("Sen")
@@ -42,5 +43,21 @@ require_relative 'config/environment'
 # puts "Representatives: #{Legislator.where("title = ?", "Rep").count}"
 
 Legislator.where("twitter_id <> ''").each do |legislator|
-  p legislator.twitter_id
+  begin
+    begin
+      $client.user_timeline(legislator.twitter_id, count: 1).each do |tweet|
+        Tweet.create!(
+          tweet_text: tweet.text, 
+          twitter_id: legislator.twitter_id, 
+          tweet_id:   tweet.id, 
+          datetime:   tweet.created_at.to_datetime
+          )
+        # p tweet.created_at.to_datetime
+      end
+    rescue ActiveRecord::RecordInvalid => invalid
+      puts invalid.record.errors
+    end
+  rescue Twitter::Error::Unauthorized
+  rescue Twitter::Error::NotFound
+  end
 end

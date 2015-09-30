@@ -6,7 +6,7 @@ class CreateTweets < ActiveRecord::Migration
       c.string :tweet_text
       c.datetime :datetime
       c.integer :twitter_id
-      c.integer :tweet_id
+      c.integer :tweet_id, limit: 4
     end
   end
 end

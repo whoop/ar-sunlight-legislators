@@ -5,7 +5,7 @@ class CreateTweets < ActiveRecord::Migration
     create_table :tweets do |c|
       c.string :tweet_text
       c.datetime :datetime
-      c.integer :twitter_id
+      c.string :twitter_id
       c.string :tweet_id
     end
   end

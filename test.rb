@@ -45,7 +45,7 @@ require_relative 'app/models/tweet'
 Legislator.where("twitter_id <> ''").each do |legislator|
   begin
     begin
-      $client.user_timeline(legislator.twitter_id, count: 1).each do |tweet|
+      $client.user_timeline(legislator.twitter_id, count: 10).each do |tweet|
         Tweet.create!(
           tweet_text: tweet.text, 
           twitter_id: legislator.twitter_id, 
